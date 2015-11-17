@@ -11,7 +11,6 @@ myApp.controller('AddressController', ["$scope", "$http", function($scope, $http
 
 myApp.controller('OrderController', ["$scope", "$http", function($scope, $http) {
     console.log('OrderController running');
-
     $scope.orders = [];
 
     $http({
@@ -21,7 +20,7 @@ myApp.controller('OrderController', ["$scope", "$http", function($scope, $http) 
     }).then(
         function(response) {
             console.log(response.data);
-            //$scope.orders = response.data.results;
+            $scope.orders = response.data;
         });
 
 }]);

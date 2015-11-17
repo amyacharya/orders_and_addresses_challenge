@@ -1,1 +1,14 @@
-<p>Orders</p>
+<div ng-controller="OrderController" class="col-md-10">
+    <table class="data-table table-striped">
+        <tr>
+            <th>Order Date</th>
+            <th>Ship Address</th>
+            <th>Amount</th>
+        </tr>
+        <tr ng-repeat="order in orders">
+            <td>{{order.order_date}}</td>
+            <td>{{order.address_type}}</td>
+            <td>{{order.amount | filter: currency}}</td>
+        </tr>
+    </table>
+</div>
