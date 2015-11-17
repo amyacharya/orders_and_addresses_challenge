@@ -6,29 +6,29 @@ var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/or
 
 // gets orders for the given user
 router.get("/", function(req, res) {
-    // get params
-    //var queryOptions = {
-    //    userID: req.query.userId,
-    //    startDate: req.query.startDate,
-    //    endDate: req.query.endDate
-    //}
+    // get params from req.query object
+    var queryOptions = {
+        userID: req.query.userID,
+        startDate: req.query.startDate || '10-01-2015',
+        endDate: req.query.endDate || '01-01-2016'
+    };
+
+    console.log(queryOptions);
 
     var results = [];
 
     pg.connect(connectionString, function (err, client, done) {
-        //var query = "
-        //    SELECT users.name, addresses.address_type, address.address_street, orders.*
-        //    FROM orders
-        //    JOIN addresses
-        //        ON addresses.address_id = orders.ship_address_id
-        //    JOIN users
-        //        ON users.id = orders.user_id
-        //    WHERE orders.order_date between
-        //
-        //
-        //";
+        var query = "SELECT users.name, addresses.address_type, addresses.address_street, orders.* \
+            FROM orders \
+            JOIN addresses \
+                ON addresses.address_id = orders.ship_address_id \
+            JOIN users \
+                ON users.id = orders.user_id \
+            WHERE orders.order_date between $1 AND $2";
 
-        var result = client.query("SELECT * FROM orders");
+        console.log("final query:", query);
+
+        var result = client.query(query, [queryOptions.startDate, queryOptions.endDate]);
 
         // Stream results back one row at a time
         result.on('row', function (row) {

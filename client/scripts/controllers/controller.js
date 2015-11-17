@@ -14,7 +14,11 @@ myApp.controller('OrderController', ["$scope", "$http", function($scope, $http) 
 
     $scope.orders = [];
 
-    $http.get('/orders/').then(
+    $http({
+        url: '/orders/',
+        method: 'GET',
+        params: {userID: 1}
+    }).then(
         function(response) {
             console.log(response.data);
             //$scope.orders = response.data.results;
