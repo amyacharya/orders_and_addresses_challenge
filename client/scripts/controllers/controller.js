@@ -16,31 +16,38 @@ myApp.controller('OrderController', ["$scope", "$http", function($scope, $http) 
         $scope.ordersTotal = 0;
         $scope.selectedUser = {};
 
-        $scope.selectUser = function() {
-            console.log($scope.selectedUser);
-        };
-
         $scope.getOrders = function() {
             $http({
                 url: '/orders/',
                 method: 'GET',
-                params: {userID: $scope.selectedUser.id}
+                params: {
+                    userID: $scope.selectedUser.id,
+                    startDate: $scope.selectedUser.startDate,
+                    endDate: $scope.selectedUser.endDate
+                }
             }).then(
                 function(response) {
-                    for (var i = 0; i < response.data.length; i++) {
-                        $scope.ordersTotal += parseFloat(response.data[i].amount);
-                    }
+                    updateTotal(response.data);
                     $scope.orders = response.data;
                 });
         };
 
-        // get list of users
-        $http.get('/users/').then(
-            function(response) {
-                console.log(response.data);
-                $scope.users = response.data;
-            });
+        function updateTotal(data) {
+            $scope.ordersTotal = 0;
+            for (var i = 0; i < data.length; i++) {
+                $scope.ordersTotal += parseFloat(data[i].amount);
+            }
+        }
 
+        var getUsers = function() {
+            $http.get('/users/').then(
+                function(response) {
+                    console.log(response.data);
+                    $scope.users = response.data;
+                });
+        }
+
+    getUsers();
 
 }]);
 

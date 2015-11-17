@@ -9,7 +9,7 @@ router.get("/", function(req, res) {
     // get params from req.query object
     var queryOptions = {
         userID: req.query.userID,
-        startDate: req.query.startDate || '10-01-2015',
+        startDate: req.query.startDate || '01-01-2010',
         endDate: req.query.endDate || '01-01-2016'
     };
 
