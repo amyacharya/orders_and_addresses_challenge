@@ -1,12 +1,10 @@
 <div class="col-md-10">
- Message: {{users}}
+
     <form name="userList">
         <label for="userselect">Select a User: </label>
         <select ng-options="user.name for user in users" ng-model="selectedUser" id="userselect"></select>
         <button ng-click="getAddresses()" class="btn">Change</button>
     </form>
-
-    <p>{{selectedUser}}</p>
 
     <div class="well" ng-repeat="address in addresses">
         <h3>{{address.address_type}}</h3>

@@ -13,8 +13,6 @@ router.get("/", function(req, res) {
         endDate: req.query.endDate || '01-01-2016'
     };
 
-    console.log(queryOptions);
-
     var results = [];
 
     pg.connect(connectionString, function (err, client, done) {
