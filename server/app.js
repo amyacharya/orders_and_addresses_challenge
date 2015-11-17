@@ -1,14 +1,23 @@
+/*  SERVER  */
 var express = require('express');
 var app = express();
 
-var data = require('./routes/data');
+var users = require('./routes/users');
+var orders = require('./routes/orders');
 var index = require('./routes/index');
 
-app.set("port", process.env.PORT || 5000);
+// mount body parser middleware
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/data', data);
-app.use('/', index);
+// mount router middleware
+app.use("/users", users);
+app.use("/orders", orders);
+app.use("/", index);
 
-app.listen(app.get("port"), function(){
-    console.log("Listening on port: ", app.get("port"));
+// set node to listen on a port
+app.set('port', process.env.PORT || 5000);
+app.listen(app.get("port"), function() {
+    console.log("Server is ready: " + app.get("port"));
 });

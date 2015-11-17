@@ -1,3 +1,8 @@
+myApp.controller('HomeController', ["$scope", "$http", function($scope, $http){
+    $scope.message = "Home!";
+
+}]);
+
 myApp.controller('AddressController', ["$scope", "$http", function($scope, $http){
     $scope.data = [];
 
@@ -10,4 +15,3 @@ myApp.controller('AddressController', ["$scope", "$http", function($scope, $http
 myApp.controller('OrderController', ["$scope", "$http", function($scope, $http){
 
 }]);
-

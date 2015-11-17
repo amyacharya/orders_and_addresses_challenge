@@ -10,16 +10,11 @@
 </head>
 <body>
     <header ng-include="'/assets/views/templates/header.html'"></header>
+    <nav ng-include="'/assets/views/templates/nav.html'"></nav>
 
-    <!--<header ng-include="'/assets/views/templates/nav.html'"></header>-->
+    <ng-main></ng-main>
 
-    <form id="editForm">
-        <input type="text" id="firstName" />
-        <input type="text" id="lastName" />
-        <button class="btn">Save</button>
-    </form>
-
-    <header ng-include="'/assets/views/templates/footer.html'"></header>
+    <footer ng-include="'/assets/views/templates/footer.html'"></footer>
 
     <!--SCRIPTS-->
     <script type="text/javascript" src="/vendors/angular.min.js"></script>
