@@ -2,10 +2,9 @@
 var express = require('express');
 var app = express();
 
-var users = require('./routes/users');
-var orders = require('./routes/orders');
+// 1. add users module
 var index = require('./routes/index');
-var addresses = require('./routes/addresses');
+
 
 // mount body parser middleware
 var bodyParser = require('body-parser');
@@ -13,9 +12,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // mount router middleware
-app.use("/users", users);
-app.use("/orders", orders);
-app.use("/addresses", addresses);
 app.use("/", index);
 
 // set node to listen on a port
