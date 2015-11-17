@@ -24,11 +24,10 @@ router.get("/", function(req, res) {
                 ON addresses.address_id = orders.ship_address_id \
             JOIN users \
                 ON users.id = orders.user_id \
-            WHERE orders.order_date between $1 AND $2";
+            WHERE orders.order_date between $1 AND $2 \
+                AND orders.user_id = $3";
 
-        console.log("final query:", query);
-
-        var result = client.query(query, [queryOptions.startDate, queryOptions.endDate]);
+        var result = client.query(query, [queryOptions.startDate, queryOptions.endDate, queryOptions.userID]);
 
         // Stream results back one row at a time
         result.on('row', function (row) {

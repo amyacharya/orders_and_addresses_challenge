@@ -10,18 +10,37 @@ myApp.controller('AddressController', ["$scope", "$http", function($scope, $http
 }]);
 
 myApp.controller('OrderController', ["$scope", "$http", function($scope, $http) {
-    console.log('OrderController running');
-    $scope.orders = [];
+        console.log('OrderController running');
+        $scope.orders = [];
+        $scope.users = [];
+        $scope.ordersTotal = 0;
+        $scope.selectedUser = {};
 
-    $http({
-        url: '/orders/',
-        method: 'GET',
-        params: {userID: 1}
-    }).then(
-        function(response) {
-            console.log(response.data);
-            $scope.orders = response.data;
-        });
+        $scope.selectUser = function() {
+            console.log($scope.selectedUser);
+        };
+
+        $scope.getOrders = function() {
+            $http({
+                url: '/orders/',
+                method: 'GET',
+                params: {userID: $scope.selectedUser.id}
+            }).then(
+                function(response) {
+                    for (var i = 0; i < response.data.length; i++) {
+                        $scope.ordersTotal += parseFloat(response.data[i].amount);
+                    }
+                    $scope.orders = response.data;
+                });
+        };
+
+        // get list of users
+        $http.get('/users/').then(
+            function(response) {
+                console.log(response.data);
+                $scope.users = response.data;
+            });
+
 
 }]);
 

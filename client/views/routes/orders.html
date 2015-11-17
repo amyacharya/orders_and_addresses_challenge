@@ -1,5 +1,14 @@
 <div ng-controller="OrderController" class="col-md-10">
-    <table class="data-table table-striped">
+
+    <form name="userList">
+        <label for="userselect">Select a User: </label>
+        <select ng-options="user.name for user in users" ng-model="selectedUser" id="userselect"></select>
+        <button ng-click="getOrders()" class="btn">Change</button>
+    </form>
+
+    {{selectedUser}}
+    <div ng-show="orders.length > 0">
+    <table class="table table-striped">
         <tr>
             <th>Order Date</th>
             <th>Ship Address</th>
@@ -8,7 +17,12 @@
         <tr ng-repeat="order in orders">
             <td>{{order.order_date}}</td>
             <td>{{order.address_type}}</td>
-            <td>{{order.amount | filter: currency}}</td>
+            <td>{{order.amount | currency: '$'}}</td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+            <td>{{ordersTotal | currency: '$'}}</td>
         </tr>
     </table>
+    </div>
 </div>
