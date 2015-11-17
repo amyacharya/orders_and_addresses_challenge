@@ -1,9 +1,6 @@
-myApp.controller('HomeController', ["$scope", "$http", function($scope, $http){
-    $scope.message = "Home!";
+myApp.controller('AddressController', ["$scope", "$http", function($scope, $http) {
+    console.log('AddressController running');
 
-}]);
-
-myApp.controller('AddressController', ["$scope", "$http", function($scope, $http){
     $scope.data = [];
 
     $scope.getAddressesForUser = function(userID) {
@@ -12,6 +9,25 @@ myApp.controller('AddressController', ["$scope", "$http", function($scope, $http
 
 }]);
 
-myApp.controller('OrderController', ["$scope", "$http", function($scope, $http){
+myApp.controller('OrderController', ["$scope", "$http", function($scope, $http) {
+    console.log('OrderController running');
+
+    $scope.orders = [];
+
+    $http.get('/orders/').then(
+        function(response) {
+            console.log(response.data);
+            //$scope.orders = response.data.results;
+        });
 
 }]);
+
+myApp.service('UserList', ["$scope", "$http"], function($scope, $http) {
+    $scope.users = [];
+
+    $scope.getUserList = function() {
+        $http.get('/users', function(data) {
+
+        })
+    }
+});
