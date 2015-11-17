@@ -7,16 +7,14 @@ var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/or
 // Returns the entire list of people
 router.get("/", function(req, res) {
     var results = [];
-    var criteria = {
-        userID: req.query.userID
-    };
+    var userID = req.query.userID;
 
     pg.connect(connectionString, function (err, client, done) {
         var query = "";
-        if(criteria) {
-            query = client.query("SELECT * FROM addresses WHERE user_id = $1", [criteria.userID]);
+        if(userID) {
+            query = client.query("SELECT * FROM addresses WHERE user_id = $1", [userID]);
         } else {
-            query = client.query("SELECT * FROM addresses");
+            query = client.query("SELECT * FROM addresses ORDER BY user_id ASC");
         }
 
         // Stream results back one row at a time

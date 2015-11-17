@@ -1,11 +1,37 @@
-myApp.controller('AddressController', ["$scope", "$http", function($scope, $http) {
+myApp.controller('AddressController', ["$scope", "$http", "UserService", function($scope, $http, UserService) {
     console.log('AddressController running');
+    $scope.users = [];
+    $scope.addresses = [];
+    $scope.selectedUser = {};
 
-    $scope.data = [];
+    $scope.userService = UserService;
 
-    $scope.getAddressesForUser = function(userID) {
+    if($scope.userService.userData() === undefined) {
+        console.log("getting user list from user service");
+        $scope.userService.userList()
+            .then(function() {
+                $scope.users = $scope.userService.userData();
+            });
+    } else {
+        $scope.users = $scope.userService.userData();
+    }
 
+    $scope.getAddresses = function() {
+        console.log($scope.users);
+
+        $http({
+            url: '/addresses/',
+            method: 'GET',
+            params: {
+                userID: $scope.selectedUser.id,
+            }
+        }).then(
+            function(response) {
+                console.log(response);
+                $scope.addresses = response.data;
+            });
     };
+
 
 }]);
 
@@ -14,7 +40,6 @@ myApp.controller('OrderController', ["$scope", "$http", function($scope, $http) 
         $scope.orders = [];
         $scope.users = [];
         $scope.ordersTotal = 0;
-        $scope.selectedUser = {};
 
         $scope.getOrders = function() {
             $http({
@@ -45,18 +70,8 @@ myApp.controller('OrderController', ["$scope", "$http", function($scope, $http) 
                     console.log(response.data);
                     $scope.users = response.data;
                 });
-        }
+        };
 
     getUsers();
 
 }]);
-
-myApp.service('UserList', ["$scope", "$http"], function($scope, $http) {
-    $scope.users = [];
-
-    $scope.getUserList = function() {
-        $http.get('/users', function(data) {
-
-        })
-    }
-});
