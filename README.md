@@ -1,6 +1,7 @@
 #Address and Order Viewer Application
 
 This repo has 3 branches:
+
 1. Master: A completed solution to the challenge with some duplicated code
 2. New: A base working static file server and a working Angular app (routes, controllers)
 3. With Services: Master refactored using an Angular Service to populate the user drop-down list. Implemented in the AddressController but not the OrderController.
@@ -15,6 +16,7 @@ You’ll need to use much of what you’ve learned to-date in order to complete 
 ###Set-up the Database
 
 Be sure to read the comments in this file!
+
 1. Create a New Postgres Database in PgAdmin
 2. Take the attached SQL file and update it where it asks (your name, add 2 addresses for yourself, uncomment the orders insert lines)
 3. Copy the SQL from the attached file and run it against this database in PgAdmin. 
