@@ -22,10 +22,10 @@ myApp.service('UserService', ['$http', function($http) {
     // get list of users
     var getUsers = function() {
         var promise = $http.get('/users/').then(
-                function(response) {
-                    data = response.data;
-                    console.log("Async User Data Response: ", data);
-                });
+            function(response) {
+                data = response.data;
+                console.log("Async User Data Response: ", data);
+            });
 
         return promise;
     };
