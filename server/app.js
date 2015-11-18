@@ -5,7 +5,6 @@ var app = express();
 // 1. add users module
 var index = require('./routes/index');
 
-
 // mount body parser middleware
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
