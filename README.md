@@ -2,10 +2,9 @@
 
 This repo has 3 branches:
 
-1. Master: A completed solution to the challenge with some duplicated code
-2. New: A base working static file server and a working Angular app (routes, controllers)
-3. With Services: Master refactored using an Angular Service to populate the user drop-down list. Implemented in the AddressController but not the OrderController.
-
+1. Master: A completed solution to the challenge with some duplicated code for the user select list.
+2. New: A base working static file server and a working Angular app (routes, controllers). Nothing of the challenge is implemented.
+3. With Services: Master branch refactored using an Angular Service to populate the user drop-down list. Implemented in the AddressController but not the OrderController.
 
 ##Instructions
 
